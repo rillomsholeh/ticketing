@@ -1,5 +1,29 @@
-import React from "react";
+import Link from "next/link";
+import Layout from "@/components/Layout";
+import EventItem from "@/components/EventItem";
+import { API_URL } from "@/config/index";
 
-export default function index() {
-  return <div>Hello</div>;
+export default function EventPage({ events }) {
+  return (
+    <Layout>
+      <h1>Events</h1>
+      {events.length === 0 && <h3>No Events To Show</h3>}
+
+      {events.map((evt) => (
+        <EventItem key={evt.id} evt={evt} />
+      ))}
+    </Layout>
+  );
+}
+
+// ketika ke halaman home akan eksekusi serversideprops
+
+export async function getStaticProps() {
+  const res = await fetch(`${API_URL}/api/events`);
+  const events = await res.json();
+
+  return {
+    props: { events },
+    revalidate: 1,
+  };
 }
