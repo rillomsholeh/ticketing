@@ -20,7 +20,7 @@ export default function EventPage({ evt }) {
             </a>
           </Link>
           <a href="#" className={styles.delete} onClick={deleteEvent}>
-            <FaTimes /> Delete Event
+            <FaTimes /> Delete Events
           </a>
         </div>
 
